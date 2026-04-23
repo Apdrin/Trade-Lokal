@@ -1,11 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeLokal | Handmade Crafts</title>
+
+   <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css"> <!-- reuse your main CSS -->
+</head>
+<body class="handmade">
+  <!-- Navigation -->
+  <!-- 1. NAVBAR -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-leaf me-2"></i>TradeLokal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-sm btn-outline-success ms-2" href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Handmade Crafts</h1>
+      <p>Discover unique, handcrafted items from local artisans.</p>
+      <div class="search-bar">
+        <input type="text" id="categorySearchInput" placeholder="Search handmade crafts (e.g., Basket, Jewelry)...">
+        <button class="search-btn">Search</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product Display Section -->
+  <section class="products">
+    <div class="container">
+        <h2 class="text-center mb-4 fw-bold" style="color: var(--primary-orange);">Available Handmade Crafts</h2>
+        <div class="row g-4 " id="product-list">
+
+        <!-- Product Card Example -->
+        <div class="col-md-6 col-lg-3 product-item" data-name="woven basket crafts">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/8D6E63/white?text=Woven+Basket" alt="Woven Basket" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Woven Basket</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Handwoven from natural fibers</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱450.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Woven Basket')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3 product-item" data-name="pottery vase crafts">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/795548/white?text=Pottery+Vase" alt="Pottery Vase" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Ceramic Vase</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Handcrafted pottery from local artisans</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱800.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Ceramic Vase')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3 product-item" data-name="handmade jewelry crafts">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/FFD700/white?text=Handmade+Jewelry" alt="Handmade Jewelry" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Beaded Necklace</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Unique handmade jewelry pieces</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱350.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Beaded Necklace')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 product-item" data-name="wooden carving crafts">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/8B4513/white?text=Wooden+Carving" alt="Wooden Carving" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Wooden Sculpture</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Intricate wood carvings by skilled craftsmen</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱1,200.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Wooden Sculpture')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 product-item" data-name="handmade soap crafts">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/E91E63/white?text=Handmade+Soap" alt="Handmade Soap" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Artisan Soap</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Natural, handmade soaps with essential oils</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱150.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Artisan Soap')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 product-item" data-name="embroidered textile crafts">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/FF69B4/white?text=Embroidered+Textile" alt="Embroidered Textile" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Embroidered Pillow</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Beautifully embroidered home decor</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱600.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Embroidered Pillow')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 product-item" data-name="bamboo crafts">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/228B22/white?text=Bamboo+Crafts" alt="Bamboo Crafts" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Bamboo Wind Chimes</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Eco-friendly bamboo crafts</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱300.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Bamboo Wind Chimes')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 product-item" data-name="leather goods crafts">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/8B4513/white?text=Leather+Wallet" alt="Leather Wallet" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Handcrafted Wallet</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Durable leather goods made by hand</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱750.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Handcrafted Wallet')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+    </div>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="script.js"></script>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 TradeLokal | Buy Local, Support Communities</p>
+  </footer>
 </body>
 </html>
