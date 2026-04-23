@@ -1,11 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeLokal | Agri Products</title>
+
+   <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css"> <!-- reuse your main CSS -->
 </head>
-<body>
-    
+<body class="agri-products">
+  <!-- Navigation -->
+  <!-- 1. NAVBAR -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-leaf me-2"></i>TradeLokal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-sm btn-outline-success ms-2" href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Agri Products</h1>
+      <p>Fresh produce and agricultural supplies from local farmers.</p>
+      <div class="search-bar">
+        <input type="text" id="categorySearchInput" placeholder="Search agri products (e.g., Seeds, Fertilizer)...">
+        <button class="search-btn">Search</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product Display Section -->
+  <section class="products">
+    <div class="container">
+        <h2 class="text-center mb-4 fw-bold" style="color: var(--primary-orange);">Available Agri Products</h2>
+        <div class="row g-4 " id="product-list">
+
+        <!-- Product Card Example -->
+        <div class="col-md-6 col-lg-3 product-item" data-name="organic seeds agri">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/4CAF50/white?text=Organic+Seeds" alt="Organic Seeds" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Organic Vegetable Seeds</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> High-quality seeds for home gardening</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱150.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Organic Vegetable Seeds')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 product-item" data-name="organic fertilizer agri">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/8D6E63/white?text=Organic+Fertilizer" alt="Organic Fertilizer" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Organic Compost</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Natural fertilizer for healthy plants</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱200.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Organic Compost')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 product-item" data-name="fresh herbs agri">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/388E3C/white?text=Fresh+Herbs" alt="Fresh Herbs" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Fresh Basil</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Locally grown aromatic herbs</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱45.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Fresh Basil')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 product-item" data-name="dried fruits agri">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/FF9800/white?text=Dried+Mangoes" alt="Dried Mangoes" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Dried Mangoes</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Sweet, naturally dried tropical fruit</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱180.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Dried Mangoes')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 product-item" data-name="rice seeds agri">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/FFF59D/333?text=Rice+Seeds" alt="Rice Seeds" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Premium Rice Seeds</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> High-yield local rice varieties</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱300.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Premium Rice Seeds')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 product-item" data-name="coconut products agri">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/8B4513/white?text=Coconut+Oil" alt="Coconut Oil" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Virgin Coconut Oil</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Pure, cold-pressed coconut oil</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱250.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Virgin Coconut Oil')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 product-item" data-name="coffee beans agri">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/5D4037/white?text=Coffee+Beans" alt="Coffee Beans" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Arabica Coffee Beans</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Freshly roasted local coffee</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱350.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Arabica Coffee Beans')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 product-item" data-name="honey agri">
+                        <div class="product-card">
+                            <img src="https://placehold.co/400x300/FFD700/white?text=Raw+Honey" alt="Raw Honey" class="product-img">
+                            <div class="p-3">
+                                <h5 class="mb-1">Raw Honey</h5>
+                                <p class="seller-tag mb-2"><i class="fas fa-user"></i> Pure, unprocessed local honey</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="product-price">₱400.00</span>
+                                    <button class="btn btn-sm btn-orange" onclick="viewDetails('Raw Honey')">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+
+    </div>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="script.js"></script>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 TradeLokal | Buy Local, Support Communities</p>
+  </footer>
 </body>
 </html>
