@@ -45,7 +45,8 @@ if ($mysqli) {
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link btn btn-sm btn-outline-success ms-2" href="login.php">Login</a></li>
+          <li class="nav-item"><a class="nav-link btn btn-sm btn-outline-success ms-2" href="profile.php"> <i
+                class="fas fa-user me-1"></i>Profile</a></li>
         </ul>
       </div>
     </div>

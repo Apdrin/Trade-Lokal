@@ -73,7 +73,9 @@ function loginUser(string $email, string $password): bool
     if (!isset($user['role']) || $noRoleColumn) {
       $user['role'] = 'customer';
     }
+    // FIX: Set both session variables so the rest of the application works seamlessly
     $_SESSION['user'] = $user;
+    $_SESSION['user_id'] = $user['id'];
     return true;
   }
 

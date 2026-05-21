@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/auth.php';
 if (isLoggedIn()) {
-  header('Location: dashboard.php');
+  header('Location: profile.php');
   exit;
 }
 
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors[] = 'That email is already registered. Please login or use another email.';
   } else {
     loginUser($email, $password);
-    header('Location: dashboard.php');
+    header('Location: profile.php');
     exit;
   }
 }

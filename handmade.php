@@ -39,6 +39,51 @@ $stmt->close();
     </div>
   </nav>
 
+  <!-- CATEGORIES SECTION -->
+  <section id="categories" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4 fw-bold" style="color: var(--primary-green);">Shop by Category</h2>
+      <div class="row g-4">
+        <!-- Category 1 -->
+        <div class="col-6 col-md-3">
+          <div class="category-card p-4 text-center">
+            <a href="food.php" class="button">
+              <div class="cat-icon"><i class="fas fa-apple-alt"></i></div>
+              <h5>Local Food</h5>
+            </a>
+          </div>
+        </div>
+        <!-- Category 2 -->
+        <div class="col-6 col-md-3">
+          <div class="category-card p-4 text-center">
+            <a href="handmade.php" class="button">
+              <div class="cat-icon"><i class="fas fa-paint-brush"></i></div>
+              <h5>Handmade Crafts</h5>
+            </a>
+          </div>
+        </div>
+        <!-- Category 3 -->
+        <div class="col-6 col-md-3">
+          <div class="category-card p-4 text-center">
+            <a href="clothing.php" class="button">
+              <div class="cat-icon"><i class="fas fa-tshirt"></i></div>
+              <h5>Clothing</h5>
+            </a>
+          </div>
+        </div>
+        <!-- Category 4 -->
+        <div class="col-6 col-md-3">
+          <div class="category-card p-4 text-center">
+            <a href="agriProduct.php" class="button">
+              <div class="cat-icon"><i class="fas fa-seedling"></i></div>
+              <h5>Agri Products</h5>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Hero Section -->
   <header class="hero">
     <div class="hero-text">

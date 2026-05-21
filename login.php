@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/auth.php';
 if (isLoggedIn()) {
-  header('Location: dashboard.php');
+  header('Location: profile.php');
   exit;
 }
 
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   } elseif (!loginUser($email, $password)) {
     $errors[] = 'Invalid email or password.';
   } else {
-    header('Location: dashboard.php');
+    header('Location: profile.php');
     exit;
   }
 }
