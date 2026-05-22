@@ -180,17 +180,139 @@ $stmt->close();
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Edit Modal -->
+  <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editProductForm">
+            <input type="hidden" id="edit_product_id" name="product_id">
+
+            <div class="mb-3">
+              <label for="edit_name" class="form-label">Product Name</label>
+              <input type="text" class="form-control" id="edit_name" name="name" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="edit_category" class="form-label">Category</label>
+              <select class="form-control" id="edit_category" name="category" required>
+                <option value="">Select Category</option>
+                <option value="Food">Food</option>
+                <option value="Handmade">Handmade</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Agriculture">Agriculture</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="edit_price" class="form-label">Price (₱)</label>
+              <input type="number" class="form-control" id="edit_price" name="price" step="0.01" min="0" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="edit_image_url" class="form-label">Image URL (Optional)</label>
+              <input type="url" class="form-control" id="edit_image_url" name="image_url"
+                placeholder="Leave blank to keep current image">
+            </div>
+
+            <div class="mb-3">
+              <label for="edit_description" class="form-label">Description</label>
+              <textarea class="form-control" id="edit_description" name="description" rows="4" required></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn" style="background-color: var(--primary-orange); color: white;"
+            onclick="saveProduct()">
+            <i class="fas fa-save me-2"></i>Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    function deleteProduct(productId, productName) {
-      if (confirm('Are you sure you want to delete "' + productName + '"?')) {
-        // TODO: Implement delete functionality
-        alert('Product deletion coming soon!');
-      }
+    function editProduct(productId) {
+      // Fetch product details
+      fetch('product-handler.php?action=get&product_id=' + productId)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            const product = data.product;
+            document.getElementById('edit_product_id').value = product.id;
+            document.getElementById('edit_name').value = product.name;
+            document.getElementById('edit_category').value = product.category;
+            document.getElementById('edit_price').value = product.price;
+            document.getElementById('edit_image_url').value = product.image_url;
+            document.getElementById('edit_description').value = product.description;
+
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('editProductModal'));
+            modal.show();
+          } else {
+            alert('Error: ' + data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Failed to load product details');
+        });
     }
 
-    function editProduct(productId) {
-      // TODO: Implement edit functionality
-      alert('Product editing coming soon!');
+    function saveProduct() {
+      const form = document.getElementById('editProductForm');
+      const formData = new FormData(form);
+      formData.append('action', 'update');
+
+      fetch('product-handler.php', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Product updated successfully!');
+            location.reload();
+          } else {
+            alert('Error: ' + data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Failed to update product');
+        });
+    }
+
+    function deleteProduct(productId, productName) {
+      if (confirm('Are you sure you want to delete "' + productName + '"? This action cannot be undone.')) {
+        fetch('product-handler.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: 'action=delete&product_id=' + productId
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              alert('Product deleted successfully!');
+              location.reload();
+            } else {
+              alert('Error: ' + data.message);
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Failed to delete product');
+          });
+      }
     }
   </script>
   <script src="script.js"></script>

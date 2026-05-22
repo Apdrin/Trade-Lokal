@@ -1,4 +1,5 @@
 <?php
+session_start();
 header('Content-Type: text/html; charset=utf-8');
 header('Cache-Control: no-cache, no-store, must-revalidate');
 
@@ -18,6 +19,14 @@ if ($mysqli) {
     $result = $stmt->get_result();
     $featured_products = $result->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
+  }
+}
+
+// Calculate cart count
+$cart_count = 0;
+if (isset($_SESSION['cart'])) {
+  foreach ($_SESSION['cart'] as $item) {
+    $cart_count += $item['quantity'];
   }
 }
 ?>
@@ -45,6 +54,14 @@ if ($mysqli) {
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="view-cart.php">
+              <i class="fas fa-shopping-cart me-1"></i>Cart
+              <?php if ($cart_count > 0): ?>
+                <span class="badge bg-danger">
+                  <?php echo $cart_count; ?>
+                </span>
+              <?php endif; ?>
+            </a></li>
           <li class="nav-item"><a class="nav-link btn btn-sm btn-outline-success ms-2" href="profile.php"> <i
                 class="fas fa-user me-1"></i>Profile</a></li>
         </ul>

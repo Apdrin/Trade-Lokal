@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/db.php';
 $mysqli = getDb();
 
@@ -22,6 +23,14 @@ $stmt->close();
 if (!$product) {
   header('Location: index.php');
   exit;
+}
+
+// Calculate cart count
+$cart_count = 0;
+if (isset($_SESSION['cart'])) {
+  foreach ($_SESSION['cart'] as $item) {
+    $cart_count += $item['quantity'];
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -48,6 +57,12 @@ if (!$product) {
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="view-cart.php">
+              <i class="fas fa-shopping-cart me-1"></i>Cart
+              <?php if ($cart_count > 0): ?>
+                <span class="badge bg-danger"><?php echo $cart_count; ?></span>
+              <?php endif; ?>
+            </a></li>
           <li class="nav-item"><a class="nav-link btn btn-sm btn-outline-success ms-2" href="login.php">Login</a></li>
         </ul>
       </div>
@@ -104,9 +119,19 @@ if (!$product) {
             <h2 style="color: var(--primary-orange);">₱<?php echo number_format($product['price'], 2); ?></h2>
           </div>
 
+          <!-- Quantity Selector -->
+          <div class="mb-4">
+            <label class="form-label" for="quantity">Quantity</label>
+            <div class="d-flex gap-2 align-items-center">
+              <input type="number" id="quantity" class="form-control" style="width: 80px;" value="1" min="1" max="100">
+              <span class="text-muted">Available</span>
+            </div>
+          </div>
+
           <!-- Action Buttons -->
           <div class="d-grid gap-2 d-sm-flex mb-5">
-            <button class="btn btn-lg" style="background-color: var(--primary-orange); color: white;">
+            <button class="btn btn-lg" style="background-color: var(--primary-orange); color: white;"
+              onclick="addToCart(<?php echo $product['id']; ?>)">
               <i class="fas fa-shopping-cart me-2"></i>Add to Cart
             </button>
             <button class="btn btn-lg btn-outline-secondary">
@@ -211,6 +236,38 @@ if (!$product) {
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function addToCart(productId) {
+      const quantity = document.getElementById('quantity').value;
+
+      if (quantity <= 0) {
+        alert('Please enter a valid quantity');
+        return;
+      }
+
+      fetch('cart-handler.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `action=add&product_id=${productId}&quantity=${quantity}`
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Product added to cart! Items in cart: ' + data.cart_count);
+            // Reset quantity
+            document.getElementById('quantity').value = 1;
+          } else {
+            alert('Error: ' + data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Failed to add product to cart');
+        });
+    }
+  </script>
   <script src="script.js"></script>
 </body>
 

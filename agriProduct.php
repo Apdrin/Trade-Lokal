@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/db.php';
 $mysqli = getDb();
 $category = 'Agriculture';
@@ -8,6 +9,14 @@ $stmt->execute();
 $result = $stmt->get_result();
 $products = $result->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
+
+// Calculate cart count
+$cart_count = 0;
+if (isset($_SESSION['cart'])) {
+  foreach ($_SESSION['cart'] as $item) {
+    $cart_count += $item['quantity'];
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +42,12 @@ $stmt->close();
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="view-cart.php">
+              <i class="fas fa-shopping-cart me-1"></i>Cart
+              <?php if ($cart_count > 0): ?>
+                <span class="badge bg-danger"><?php echo $cart_count; ?></span>
+              <?php endif; ?>
+            </a></li>
           <li class="nav-item"><a class="nav-link btn btn-sm btn-outline-success ms-2" href="login.php">Login</a></li>
         </ul>
       </div>
